@@ -8,7 +8,7 @@ public class WeaponPickup : MonoBehaviour
     {
         if (other.CompareTag("Player") && weapon!=null)
         {
-            other.gameObject.GetComponent<PlayerController>().EquipWeapon(weapon);
+            other.gameObject.GetComponentInChildren<Actions>().EquipWeapon(weapon);
             gameObject.SetActive(false);
         }
     }

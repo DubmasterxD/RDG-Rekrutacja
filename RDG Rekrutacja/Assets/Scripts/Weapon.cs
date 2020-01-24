@@ -4,7 +4,6 @@
 public class Weapon : ScriptableObject
 {
     [SerializeField] GameObject weaponPrefab = null;
-    [SerializeField] float weaponRange = 1;
     [SerializeField] int usages = 2;
 
     GameObject weaponObject;
@@ -20,5 +19,10 @@ public class Weapon : ScriptableObject
         {
             Destroy(weaponObject);
         }
+    }
+
+    public void Use()
+    {
+        usages--;
     }
 }

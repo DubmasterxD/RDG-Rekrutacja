@@ -54,7 +54,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4445848243369989607}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.6971703, y: 1.1009438, z: 0.52923787}
@@ -76,11 +76,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4629630779945776746, guid: 24d914271e4455443ac4d6649f0addbc,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 91dc2c1071c681b429146e57a0b64cd4, type: 2}
     - target: {fileID: 6032430518853453814, guid: 24d914271e4455443ac4d6649f0addbc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -141,11 +136,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hammer
       objectReference: {fileID: 0}
-    - target: {fileID: 7873118966111735749, guid: 24d914271e4455443ac4d6649f0addbc,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 91dc2c1071c681b429146e57a0b64cd4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24d914271e4455443ac4d6649f0addbc, type: 3}
 --- !u!4 &7166730831467130180 stripped
