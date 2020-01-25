@@ -2,5 +2,16 @@
 
 public class Ground : MonoBehaviour
 {
-    public bool isAccessible = true;
+    [SerializeField] bool isAccessible = true;
+    [SerializeField] bool canTurn = false;
+
+    public bool IsAccessible()
+    {
+        return isAccessible;
+    }
+
+    public bool CanTurn()
+    {
+        return canTurn;
+    }
 }
