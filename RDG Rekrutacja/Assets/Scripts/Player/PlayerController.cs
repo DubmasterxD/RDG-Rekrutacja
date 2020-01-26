@@ -5,10 +5,13 @@ public class PlayerController : MonoBehaviour
     public Actions actions { get; private set; }
     public Mover mover { get; private set; }
 
+    Collider collider;
+    
     private void Awake()
     {
         actions = GetComponentInChildren<Actions>();
         mover = GetComponentInChildren<Mover>();
+        collider = GetComponent<Collider>();
     }
 
     private void Update()
@@ -25,5 +28,15 @@ public class PlayerController : MonoBehaviour
     private bool IsBusy()
     {
         return actions.IsBusy() || mover.IsBusy();
+    }
+
+    public void ChangeParent(Transform newParent)
+    {
+        transform.parent = newParent;
+    }
+
+    public void ToggleCollider(bool isEnabled)
+    {
+        collider.enabled = isEnabled;
     }
 }

@@ -4,6 +4,7 @@ public class Mover : MonoBehaviour
 {
     [SerializeField] AnimatorController animator = null;
     [SerializeField] Transform player = null;
+    [SerializeField] float yPositionOffset = 0.148f;
 
     float timer = 0;
     bool canWalk = false;
@@ -43,6 +44,7 @@ public class Mover : MonoBehaviour
         {
             isWalking = false;
             animator.ToggleWalk(isWalking);
+            Reposition();
         }
     }
 
@@ -68,7 +70,37 @@ public class Mover : MonoBehaviour
         {
             player.Translate(new Vector3(0, 1, 1));
             isJumping = false;
+            Reposition();
         }
+    }
+
+    private void Reposition()
+    {
+        Vector3 newPosition = player.localPosition;
+        newPosition.x = Round(newPosition.x);
+        newPosition.y = Round(newPosition.y - yPositionOffset) + yPositionOffset;
+        newPosition.z = Round(newPosition.z);
+        player.localPosition = newPosition;
+    }
+
+    private float Round(float value)
+    {
+        if (value >= 0)
+        {
+            if (value % 1 > .5f)
+            {
+                value = (int)value + 1;
+            }
+            else
+            {
+                value = (int)value;
+            }
+        }
+        else
+        {
+            
+        }
+        return value;
     }
 
     public bool IsBusy()
