@@ -2,14 +2,16 @@
 
 public class PlayerController : MonoBehaviour
 {
-    public Actions actions { get; private set; }
+    public Fighter actions { get; private set; }
     public Mover mover { get; private set; }
+    public AnimatorController animator { get; private set; }
 
     Collider collider;
     
     private void Awake()
     {
-        actions = GetComponentInChildren<Actions>();
+        animator = GetComponent<AnimatorController>();
+        actions = GetComponentInChildren<Fighter>();
         mover = GetComponentInChildren<Mover>();
         collider = GetComponent<Collider>();
     }
@@ -27,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
     private bool IsBusy()
     {
-        return actions.IsBusy() || mover.IsBusy();
+        return transform.parent != null || mover.IsBusy();
     }
 
     public void ChangeParent(Transform newParent)

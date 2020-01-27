@@ -19,6 +19,6 @@ public class TextBlink : MonoBehaviour
 
     private void Blink()
     {
-        animator.Play(_blinkAnimatorState);
+        animator.Play(_blinkAnimatorState, 0, 0);
     }
 }

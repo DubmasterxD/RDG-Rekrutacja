@@ -9,7 +9,6 @@ public class Pipe : MonoBehaviour
     PlayerController player;
     Animator animator;
     int _enterAnimatorTrigger = Animator.StringToHash("Enter");
-    int _exitAnimatorTrigger = Animator.StringToHash("Exit");
 
     private void Awake()
     {
@@ -20,7 +19,6 @@ public class Pipe : MonoBehaviour
     {
         player.ChangeParent(exit);
         player.transform.Translate(new Vector3(0, -middleSegments - 1, 0));
-        animator.SetTrigger(_exitAnimatorTrigger);
     }
 
     public void End()
@@ -37,6 +35,7 @@ public class Pipe : MonoBehaviour
             player = other.GetComponent<PlayerController>();
             player.ChangeParent(entrance);
             player.ToggleCollider(false);
+            player.animator.PipeIn();
             animator.SetTrigger(_enterAnimatorTrigger);
         }
     }

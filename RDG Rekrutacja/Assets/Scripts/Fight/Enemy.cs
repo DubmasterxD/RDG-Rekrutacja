@@ -12,8 +12,8 @@ public class Enemy : MonoBehaviour
     int _dieAnimatorTrigger = Animator.StringToHash("Die");
     int _spawnAnimatorTrigger = Animator.StringToHash("Spawn");
 
-    float randomJumpInterval = 1;
-    float timer = 0;
+    float randomActionInterval = 1;
+    protected float timer = 0;
 
     private void Awake()
     {
@@ -32,10 +32,10 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= randomJumpInterval)
+        if (timer >= randomActionInterval)
         {
             Jump();
-            randomJumpInterval = Random.Range(1, 3);
+            randomActionInterval = Random.Range(1, 3);
             timer = 0;
         }
     }
@@ -58,12 +58,14 @@ public class Enemy : MonoBehaviour
 
     public void Died()
     {
-        Instantiate(deathPartciles, body.position, new Quaternion(0, 0, 0, 1));
+        ParticleSystem particles = Instantiate(deathPartciles, body.position, new Quaternion(0, 0, 0, 1));
+        Destroy(particles.gameObject, 1);
         gameObject.SetActive(false);
     }
 
     private void Die()
     {
         animator.SetTrigger(_dieAnimatorTrigger);
+        animator.ResetTrigger(_spawnAnimatorTrigger);
     }
 }

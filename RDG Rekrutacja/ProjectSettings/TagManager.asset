@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - Enemy
   - PlayerWeapon
+  - Trigger
   layers:
   - Default
   - TransparentFX

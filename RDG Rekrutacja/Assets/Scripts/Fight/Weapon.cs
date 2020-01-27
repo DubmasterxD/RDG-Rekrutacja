@@ -4,13 +4,15 @@
 public class Weapon : ScriptableObject
 {
     [SerializeField] GameObject weaponPrefab = null;
-    [SerializeField] int usages = 2;
+    [SerializeField] int startingUsages = 2;
 
+    int usagesLeft = 0;
     GameObject weaponObject;
 
     public void Spawn(Transform hand)
     {
         weaponObject = Instantiate(weaponPrefab, hand);
+        usagesLeft = startingUsages;
     }
 
     public void Destroy()
@@ -23,6 +25,11 @@ public class Weapon : ScriptableObject
 
     public void Use()
     {
-        usages--;
+        usagesLeft--;
+    }
+
+    public int GetUsagesLeft()
+    {
+        return usagesLeft;
     }
 }

@@ -1,17 +1,12 @@
 ﻿using UnityEngine;
 
-public class Actions : MonoBehaviour
+public class Fighter : MonoBehaviour
 {
     [SerializeField] AnimatorController animator = null;
     [SerializeField] Transform hand = null;
 
     Enemy target;
     Weapon equippedWeapon;
-
-    public bool IsBusy()
-    {
-        return false;
-    }
 
     public void EquipWeapon(Weapon newWeapon)
     {
@@ -26,6 +21,7 @@ public class Actions : MonoBehaviour
     private void UnequipWeapon()
     {
         equippedWeapon.Destroy();
+        equippedWeapon = null;
     }
 
     private void Attack(Enemy newTarget)
@@ -37,6 +33,10 @@ public class Actions : MonoBehaviour
     public void HitTarget()
     {
         equippedWeapon.Use();
+        if (equippedWeapon.GetUsagesLeft() <= 0)
+        {
+            UnequipWeapon();
+        }
         target.ReceiveHit();
     }
 

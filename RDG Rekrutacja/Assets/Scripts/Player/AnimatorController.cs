@@ -2,13 +2,14 @@
 
 public class AnimatorController : MonoBehaviour
 {
-    [SerializeField] Actions actions = null;
+    [SerializeField] Fighter actions = null;
 
     Animator animator;
     int _isWalkingAnimatorBool = Animator.StringToHash("isWalking");
     int _attackAnimatorTrigger = Animator.StringToHash("Attack");
     int _turnLeftAnimatorTrigger = Animator.StringToHash("TurnLeft");
     int _jumpAnimatorTrigger = Animator.StringToHash("Jump");
+    int _pipeInAnimatorTrigger = Animator.StringToHash("PipeIn");
 
     private void Awake()
     {
@@ -33,6 +34,11 @@ public class AnimatorController : MonoBehaviour
     public void BeginJump()
     {
         animator.SetTrigger(_jumpAnimatorTrigger);
+    }
+
+    public void PipeIn()
+    {
+        animator.SetTrigger(_pipeInAnimatorTrigger);
     }
 
     //Received from animation events

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 5040459646397180860, guid: 86cafb6beb066414889bc7515f753641,
     type: 3}
-  usages: -14
+  usages: 2
