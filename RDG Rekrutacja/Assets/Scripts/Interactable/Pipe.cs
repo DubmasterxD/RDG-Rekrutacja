@@ -27,6 +27,7 @@ public class Pipe : MonoBehaviour
     {
         player.ToggleCollider(true);
         player.ChangeParent(null);
+        player.mover.Reposition();
     }
 
     private void OnTriggerEnter(Collider other)

@@ -56,6 +56,7 @@ public class Mover : MonoBehaviour
         }
         else
         {
+            Reposition();
             isTurning = false;
         }
     }
@@ -74,31 +75,32 @@ public class Mover : MonoBehaviour
         }
     }
 
-    private void Reposition()
+    public void Reposition()
     {
         Vector3 newPosition = player.localPosition;
-        newPosition.x = Round(newPosition.x);
-        newPosition.y = Round(newPosition.y - yPositionOffset) + yPositionOffset;
-        newPosition.z = Round(newPosition.z);
+        newPosition.x = Round(newPosition.x,1);
+        newPosition.y = Round(newPosition.y - yPositionOffset,1) + yPositionOffset;
+        newPosition.z = Round(newPosition.z,1);
         player.localPosition = newPosition;
+
+        Vector3 newRotation = player.localRotation.eulerAngles;
+        newRotation.x = Round(newRotation.x, 90);
+        newRotation.y = Round(newRotation.y, 90);
+        newRotation.z = Round(newRotation.z, 90);
+        player.localRotation = Quaternion.Euler(newRotation);
     }
 
-    private float Round(float value)
+    private float Round(float value, float precision)
     {
-        if (value >= 0)
+        float reminder = value % precision;
+        value -= reminder;
+        if (value >= 0 && reminder > precision / 2)
         {
-            if (value % 1 > .5f)
-            {
-                value = (int)value + 1;
-            }
-            else
-            {
-                value = (int)value;
-            }
+            value += precision;
         }
-        else
+        else if (value <= 0 && reminder < -precision / 2)
         {
-            
+            value -= precision;
         }
         return value;
     }
