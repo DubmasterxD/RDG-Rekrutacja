@@ -1,50 +1,54 @@
-﻿using UnityEngine;
+﻿using RDGRekru.Combat;
+using UnityEngine;
 
-public class Fighter : MonoBehaviour
+namespace RDGRekru.Player
 {
-    [SerializeField] AnimatorController animator = null;
-    [SerializeField] Transform hand = null;
-
-    Enemy target;
-    Weapon equippedWeapon;
-
-    public void EquipWeapon(Weapon newWeapon)
+    public class Fighter : MonoBehaviour
     {
-        if (equippedWeapon != null)
+        [SerializeField] AnimatorController animator = null;
+        [SerializeField] Transform hand = null;
+
+        Enemy target;
+        Weapon equippedWeapon;
+
+        public void EquipWeapon(Weapon newWeapon)
+        {
+            if (equippedWeapon != null)
+            {
+                equippedWeapon.Destroy();
+            }
+            equippedWeapon = newWeapon;
+            equippedWeapon.Spawn(hand);
+        }
+
+        private void UnequipWeapon()
         {
             equippedWeapon.Destroy();
+            equippedWeapon = null;
         }
-        equippedWeapon = newWeapon;
-        equippedWeapon.Spawn(hand);
-    }
 
-    private void UnequipWeapon()
-    {
-        equippedWeapon.Destroy();
-        equippedWeapon = null;
-    }
-
-    private void Attack(Enemy newTarget)
-    {
-        target = newTarget;
-        animator.BeginAttack();
-    }
-
-    public void HitTarget()
-    {
-        equippedWeapon.Use();
-        if (equippedWeapon.GetUsagesLeft() <= 0)
+        private void Attack(Enemy newTarget)
         {
-            UnequipWeapon();
+            target = newTarget;
+            animator.BeginAttack();
         }
-        target.ReceiveHit();
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
+        public void HitTarget()
         {
-            Attack(other.GetComponent<Enemy>());
+            equippedWeapon.Use();
+            if (equippedWeapon.GetUsagesLeft() <= 0)
+            {
+                UnequipWeapon();
+            }
+            target.ReceiveHit();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Enemy"))
+            {
+                Attack(other.GetComponent<Enemy>());
+            }
         }
     }
 }

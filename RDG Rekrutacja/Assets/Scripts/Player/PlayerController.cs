@@ -1,44 +1,47 @@
 ﻿using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+namespace RDGRekru.Player
 {
-    public Fighter actions { get; private set; }
-    public Mover mover { get; private set; }
-    public AnimatorController animator { get; private set; }
-
-    Collider collider;
-    
-    private void Awake()
+    public class PlayerController : MonoBehaviour
     {
-        animator = GetComponent<AnimatorController>();
-        actions = GetComponentInChildren<Fighter>();
-        mover = GetComponentInChildren<Mover>();
-        collider = GetComponent<Collider>();
-    }
+        public Fighter fighter { get; private set; }
+        public Mover mover { get; private set; }
+        public AnimatorController animator { get; private set; }
 
-    private void Update()
-    {
-        if (!IsBusy())
+        Collider collider;
+
+        private void Awake()
         {
-            if (Input.GetKey(KeyCode.RightArrow))
+            animator = GetComponent<AnimatorController>();
+            fighter = GetComponentInChildren<Fighter>();
+            mover = GetComponentInChildren<Mover>();
+            collider = GetComponent<Collider>();
+        }
+
+        private void Update()
+        {
+            if (!IsBusy())
             {
-                mover.BeginMove();
+                if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    mover.BeginMove();
+                }
             }
         }
-    }
 
-    private bool IsBusy()
-    {
-        return transform.parent != null || mover.IsBusy();
-    }
+        private bool IsBusy()
+        {
+            return transform.parent != null || mover.IsBusy();
+        }
 
-    public void ChangeParent(Transform newParent)
-    {
-        transform.parent = newParent;
-    }
+        public void ChangeParent(Transform newParent)
+        {
+            transform.parent = newParent;
+        }
 
-    public void ToggleCollider(bool isEnabled)
-    {
-        collider.enabled = isEnabled;
+        public void ToggleCollider(bool isEnabled)
+        {
+            collider.enabled = isEnabled;
+        }
     }
 }

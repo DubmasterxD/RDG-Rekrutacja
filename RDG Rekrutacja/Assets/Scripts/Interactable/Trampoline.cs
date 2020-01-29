@@ -1,33 +1,37 @@
-﻿using UnityEngine;
+﻿using RDGRekru.Player;
+using UnityEngine;
 
-public class Trampoline : MonoBehaviour
+namespace RDGRekru.Interactable
 {
-    [SerializeField] Vector2 jumpDirection = new Vector2(0, 0);
-    [SerializeField] Transform top = null;
-
-    PlayerController player;
-    Animator animator;
-    int _springAnimatorTrigger = Animator.StringToHash("Spring");
-
-    private void Awake()
+    public class Trampoline : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
-    }
+        [SerializeField] Vector2 jumpDirection = new Vector2(0, 0);
+        [SerializeField] Transform top = null;
 
-    public void Activate()
-    {
-        player.ChangeParent(null);
-        player.mover.BeginJump(jumpDirection);
-        player = null;
-    }
+        PlayerController player;
+        Animator animator;
+        int _springAnimatorTrigger = Animator.StringToHash("Spring");
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        private void Awake()
         {
-            player = other.GetComponent<PlayerController>();
-            player.ChangeParent(top);
-            animator.SetTrigger(_springAnimatorTrigger);
+            animator = GetComponent<Animator>();
+        }
+
+        public void Activate()
+        {
+            player.ChangeParent(null);
+            player.mover.BeginJump(jumpDirection);
+            player = null;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                player = other.GetComponent<PlayerController>();
+                player.ChangeParent(top);
+                animator.SetTrigger(_springAnimatorTrigger);
+            }
         }
     }
 }

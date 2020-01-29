@@ -1,28 +1,32 @@
-﻿using UnityEngine;
+﻿using RDGRekru.Core;
+using UnityEngine;
 
-public class TriggerBlock : MonoBehaviour
+namespace RDGRekru.Interactable
 {
-    [SerializeField] Trigger useTrigger;
-    [SerializeField] Trigger resetTrigger;
-
-    Animator animator;
-    int _useAnimatorTrigger = Animator.StringToHash("Use");
-    int _resetAnimatorTrigger = Animator.StringToHash("Reset");
-
-    private void Awake()
+    public class TriggerBlock : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
-        useTrigger.onTriggerEnter += Use;
-        resetTrigger.onTriggerEnter += ResetBlock;
-    }
+        [SerializeField] Trigger useTrigger;
+        [SerializeField] Trigger resetTrigger;
 
-    private void Use()
-    {
-        animator.SetTrigger(_useAnimatorTrigger);
-    }
+        Animator animator;
+        int _useAnimatorTrigger = Animator.StringToHash("Use");
+        int _resetAnimatorTrigger = Animator.StringToHash("Reset");
 
-    private void ResetBlock()
-    {
-        animator.SetTrigger(_resetAnimatorTrigger);
+        private void Awake()
+        {
+            animator = GetComponent<Animator>();
+            useTrigger.onTriggerEnter += Use;
+            resetTrigger.onTriggerEnter += ResetBlock;
+        }
+
+        private void Use()
+        {
+            animator.SetTrigger(_useAnimatorTrigger);
+        }
+
+        private void ResetBlock()
+        {
+            animator.SetTrigger(_resetAnimatorTrigger);
+        }
     }
 }

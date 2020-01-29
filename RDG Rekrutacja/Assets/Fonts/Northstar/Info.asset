@@ -51,9 +51,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: Northstar - JUMP
+  m_Name: Info
   m_EditorClassIdentifier: 
-  hashCode: 89750181
+  hashCode: 1771239220
   material: {fileID: 884975050293601581}
   materialHashCode: 84511301
   m_Version: 1.1.0

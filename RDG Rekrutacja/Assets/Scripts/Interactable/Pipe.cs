@@ -1,42 +1,46 @@
-﻿using UnityEngine;
+﻿using RDGRekru.Player;
+using UnityEngine;
 
-public class Pipe : MonoBehaviour
+namespace RDGRekru.Interactable
 {
-    [SerializeField] Transform exit = null;
-    [SerializeField] Transform entrance = null;
-    [SerializeField] int middleSegments = 1;
-
-    PlayerController player;
-    Animator animator;
-    int _enterAnimatorTrigger = Animator.StringToHash("Enter");
-
-    private void Awake()
+    public class Pipe : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
-    }
+        [SerializeField] Transform exit = null;
+        [SerializeField] Transform entrance = null;
+        [SerializeField] int middleSegments = 1;
 
-    public void Switch()
-    {
-        player.ChangeParent(exit);
-        player.transform.Translate(new Vector3(0, -middleSegments - 1, 0));
-    }
+        PlayerController player;
+        Animator animator;
+        int _enterAnimatorTrigger = Animator.StringToHash("Enter");
 
-    public void End()
-    {
-        player.ToggleCollider(true);
-        player.ChangeParent(null);
-        player.mover.Reposition();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        private void Awake()
         {
-            player = other.GetComponent<PlayerController>();
-            player.ChangeParent(entrance);
-            player.ToggleCollider(false);
-            player.animator.PipeIn();
-            animator.SetTrigger(_enterAnimatorTrigger);
+            animator = GetComponent<Animator>();
+        }
+
+        public void Switch()
+        {
+            player.ChangeParent(exit);
+            player.transform.Translate(new Vector3(0, -middleSegments - 1, 0));
+        }
+
+        public void End()
+        {
+            player.ToggleCollider(true);
+            player.ChangeParent(null);
+            player.mover.Reposition();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                player = other.GetComponent<PlayerController>();
+                player.ChangeParent(entrance);
+                player.ToggleCollider(false);
+                player.animator.PipeIn();
+                animator.SetTrigger(_enterAnimatorTrigger);
+            }
         }
     }
 }

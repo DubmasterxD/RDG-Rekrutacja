@@ -1,24 +1,28 @@
-﻿using UnityEngine;
+﻿using RDGRekru.Core;
+using UnityEngine;
 
-public class TextBlink : MonoBehaviour
+namespace RDGRekru.Interactable
 {
-    [SerializeField] Trigger blinkTrigger = null;
-
-    Animator animator;
-    int _blinkAnimatorState = Animator.StringToHash("Blink");
-
-    private void Awake()
+    public class TextBlink : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
-    }
+        [SerializeField] Trigger blinkTrigger = null;
 
-    private void Start()
-    {
-        blinkTrigger.onTriggerEnter += Blink;
-    }
+        Animator animator;
+        int _blinkAnimatorState = Animator.StringToHash("Blink");
 
-    private void Blink()
-    {
-        animator.Play(_blinkAnimatorState, 0, 0);
+        private void Awake()
+        {
+            animator = GetComponent<Animator>();
+        }
+
+        private void Start()
+        {
+            blinkTrigger.onTriggerEnter += Blink;
+        }
+
+        private void Blink()
+        {
+            animator.Play(_blinkAnimatorState, 0, 0);
+        }
     }
 }

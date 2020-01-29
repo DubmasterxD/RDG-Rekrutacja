@@ -1,50 +1,53 @@
 ﻿using UnityEngine;
 
-public class AnimatorController : MonoBehaviour
+namespace RDGRekru.Player
 {
-    [SerializeField] Fighter actions = null;
-
-    Animator animator;
-    int _isWalkingAnimatorBool = Animator.StringToHash("isWalking");
-    int _attackAnimatorTrigger = Animator.StringToHash("Attack");
-    int _turnLeftAnimatorTrigger = Animator.StringToHash("TurnLeft");
-    int _jumpAnimatorTrigger = Animator.StringToHash("Jump");
-    int _pipeInAnimatorTrigger = Animator.StringToHash("PipeIn");
-
-    private void Awake()
+    public class AnimatorController : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
-    }
+        [SerializeField] Fighter actions = null;
 
-    public void ToggleWalk(bool isWalking)
-    {
-        animator.SetBool(_isWalkingAnimatorBool, isWalking);
-    }
+        Animator animator;
+        int _isWalkingAnimatorBool = Animator.StringToHash("isWalking");
+        int _attackAnimatorTrigger = Animator.StringToHash("Attack");
+        int _turnLeftAnimatorTrigger = Animator.StringToHash("TurnLeft");
+        int _jumpAnimatorTrigger = Animator.StringToHash("Jump");
+        int _pipeInAnimatorTrigger = Animator.StringToHash("PipeIn");
 
-    public void BeginAttack()
-    {
-        animator.SetTrigger(_attackAnimatorTrigger);
-    }
+        private void Awake()
+        {
+            animator = GetComponent<Animator>();
+        }
 
-    public void BeginTurnLeft()
-    {
-        animator.SetTrigger(_turnLeftAnimatorTrigger);
-    }
+        public void ToggleWalk(bool isWalking)
+        {
+            animator.SetBool(_isWalkingAnimatorBool, isWalking);
+        }
 
-    public void BeginJump()
-    {
-        animator.SetTrigger(_jumpAnimatorTrigger);
-    }
+        public void BeginAttack()
+        {
+            animator.SetTrigger(_attackAnimatorTrigger);
+        }
 
-    public void PipeIn()
-    {
-        animator.SetTrigger(_pipeInAnimatorTrigger);
-    }
+        public void BeginTurnLeft()
+        {
+            animator.SetTrigger(_turnLeftAnimatorTrigger);
+        }
 
-    //Received from animation events
+        public void BeginJump()
+        {
+            animator.SetTrigger(_jumpAnimatorTrigger);
+        }
 
-    public void Hit()
-    {
-        actions.HitTarget();
+        public void PipeIn()
+        {
+            animator.SetTrigger(_pipeInAnimatorTrigger);
+        }
+
+        //Received from animation events
+
+        public void Hit()
+        {
+            actions.HitTarget();
+        }
     }
 }
